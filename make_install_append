@@ -1,0 +1,2 @@
+mv %{buildroot}/etc/xdg %{buildroot}/usr/share/. && rmdir %{buildroot}/etc
+
