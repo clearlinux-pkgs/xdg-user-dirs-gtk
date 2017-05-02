@@ -4,7 +4,7 @@
 #
 Name     : xdg-user-dirs-gtk
 Version  : 0.10
-Release  : 2
+Release  : 3
 URL      : http://ftp.gnome.org/pub/gnome/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
 Source0  : http://ftp.gnome.org/pub/gnome/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
 Summary  : No detailed summary available
