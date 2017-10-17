@@ -4,9 +4,9 @@
 #
 Name     : xdg-user-dirs-gtk
 Version  : 0.10
-Release  : 3
-URL      : http://ftp.gnome.org/pub/gnome/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
-Source0  : http://ftp.gnome.org/pub/gnome/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
+Release  : 4
+URL      : https://download.gnome.org/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
+Source0  : https://download.gnome.org/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -56,7 +56,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1492797549
+export SOURCE_DATE_EPOCH=1508274146
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -68,7 +68,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1492797549
+export SOURCE_DATE_EPOCH=1508274146
 rm -rf %{buildroot}
 %make_install
 %find_lang xdg-user-dirs-gtk
