@@ -4,15 +4,17 @@
 #
 Name     : xdg-user-dirs-gtk
 Version  : 0.10
-Release  : 6
+Release  : 7
 URL      : https://download.gnome.org/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
 Source0  : https://download.gnome.org/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
-Summary  : No detailed summary available
+Summary  : Creates user dirs and asks to relocalize them
 Group    : Development/Tools
 License  : GPL-2.0
-Requires: xdg-user-dirs-gtk-bin
-Requires: xdg-user-dirs-gtk-locales
-Requires: xdg-user-dirs-gtk-data
+Requires: xdg-user-dirs-gtk-bin = %{version}-%{release}
+Requires: xdg-user-dirs-gtk-data = %{version}-%{release}
+Requires: xdg-user-dirs-gtk-license = %{version}-%{release}
+Requires: xdg-user-dirs-gtk-locales = %{version}-%{release}
+BuildRequires : buildreq-gnome
 BuildRequires : gettext
 BuildRequires : intltool
 BuildRequires : perl(XML::Parser)
@@ -26,7 +28,8 @@ the Gnome desktop and Gtk+ applications.
 %package bin
 Summary: bin components for the xdg-user-dirs-gtk package.
 Group: Binaries
-Requires: xdg-user-dirs-gtk-data
+Requires: xdg-user-dirs-gtk-data = %{version}-%{release}
+Requires: xdg-user-dirs-gtk-license = %{version}-%{release}
 
 %description bin
 bin components for the xdg-user-dirs-gtk package.
@@ -38,6 +41,14 @@ Group: Data
 
 %description data
 data components for the xdg-user-dirs-gtk package.
+
+
+%package license
+Summary: license components for the xdg-user-dirs-gtk package.
+Group: Default
+
+%description license
+license components for the xdg-user-dirs-gtk package.
 
 
 %package locales
@@ -56,9 +67,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1508274146
+export SOURCE_DATE_EPOCH=1557026334
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
@@ -68,13 +86,15 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1508274146
+export SOURCE_DATE_EPOCH=1557026334
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/xdg-user-dirs-gtk
+cp COPYING %{buildroot}/usr/share/package-licenses/xdg-user-dirs-gtk/COPYING
 %make_install
 %find_lang xdg-user-dirs-gtk
-## make_install_append content
+## install_append content
 mv %{buildroot}/etc/xdg %{buildroot}/usr/share/. && rmdir %{buildroot}/etc
-## make_install_append end
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -86,6 +106,10 @@ mv %{buildroot}/etc/xdg %{buildroot}/usr/share/. && rmdir %{buildroot}/etc
 %files data
 %defattr(-,root,root,-)
 /usr/share/xdg/autostart/user-dirs-update-gtk.desktop
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/xdg-user-dirs-gtk/COPYING
 
 %files locales -f xdg-user-dirs-gtk.lang
 %defattr(-,root,root,-)
