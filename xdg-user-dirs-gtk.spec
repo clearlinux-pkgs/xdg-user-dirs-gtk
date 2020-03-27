@@ -4,7 +4,7 @@
 #
 Name     : xdg-user-dirs-gtk
 Version  : 0.10
-Release  : 7
+Release  : 8
 URL      : https://download.gnome.org/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
 Source0  : https://download.gnome.org/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
 Summary  : Creates user dirs and asks to relocalize them
