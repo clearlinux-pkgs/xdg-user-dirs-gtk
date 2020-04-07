@@ -4,10 +4,10 @@
 #
 Name     : xdg-user-dirs-gtk
 Version  : 0.10
-Release  : 8
+Release  : 9
 URL      : https://download.gnome.org/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
 Source0  : https://download.gnome.org/sources/xdg-user-dirs-gtk/0.10/xdg-user-dirs-gtk-0.10.tar.xz
-Summary  : Creates user dirs and asks to relocalize them
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: xdg-user-dirs-gtk-bin = %{version}-%{release}
@@ -61,39 +61,42 @@ locales components for the xdg-user-dirs-gtk package.
 
 %prep
 %setup -q -n xdg-user-dirs-gtk-0.10
+cd %{_builddir}/xdg-user-dirs-gtk-0.10
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557026334
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1586245025
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1557026334
+export SOURCE_DATE_EPOCH=1586245025
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xdg-user-dirs-gtk
-cp COPYING %{buildroot}/usr/share/package-licenses/xdg-user-dirs-gtk/COPYING
+cp %{_builddir}/xdg-user-dirs-gtk-0.10/COPYING %{buildroot}/usr/share/package-licenses/xdg-user-dirs-gtk/dfac199a7539a404407098a2541b9482279f690d
 %make_install
 %find_lang xdg-user-dirs-gtk
 ## install_append content
 mv %{buildroot}/etc/xdg %{buildroot}/usr/share/. && rmdir %{buildroot}/etc
+
 ## install_append end
 
 %files
@@ -109,7 +112,7 @@ mv %{buildroot}/etc/xdg %{buildroot}/usr/share/. && rmdir %{buildroot}/etc
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/xdg-user-dirs-gtk/COPYING
+/usr/share/package-licenses/xdg-user-dirs-gtk/dfac199a7539a404407098a2541b9482279f690d
 
 %files locales -f xdg-user-dirs-gtk.lang
 %defattr(-,root,root,-)
